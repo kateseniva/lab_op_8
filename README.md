@@ -38,3 +38,16 @@ void result()
 }
 }
 }
+
+void open()
+{
+    fo = fopen("source.txt","wt");
+    file = fopen("out.txt","wt");
+}
+
+void close()
+{
+    fclose(fo);
+    fclose(file);
+}
+
