@@ -9,3 +9,7 @@ using namespace std;
 char m[100];// вихідний рядок
 int n, k;
 FILE * fo, * file;
+
+void result();
+void open();
+void close();
