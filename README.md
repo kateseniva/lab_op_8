@@ -13,3 +13,12 @@ FILE * fo, * file;
 void result();
 void open();
 void close();
+
+int main()
+{
+    cout << "enter n: "; cin >> n;
+    open();
+    result();
+    close();
+    return 0;
+}
