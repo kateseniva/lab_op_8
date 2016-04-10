@@ -22,3 +22,19 @@ int main()
     close();
     return 0;
 }
+
+void result()
+{
+   if (fo) // если есть доступ к файлу,
+    {
+        for(int i=1; i<=(n+1); i++){
+        gets(m); // инициализируем строку
+        fprintf(fo, "%s\n", m);
+        fprintf(file, "%d", i);
+        fprintf(file, "%s\t", m);
+        k=strlen(m);
+        fprintf(file, "lenght: %d\n", k);
+
+}
+}
+}
