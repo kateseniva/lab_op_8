@@ -3,51 +3,73 @@
 #include <io.h>
 #include <conio.h>
 #include <string.h>
+#include <fstream>
+#include <cstdlib>
+#include <sstream>
+
 
 using namespace std;
 
-char m[100];// вихідний рядок
-int n, k;
-FILE * fo, * file;
+fstream fo;
+ofstream file;
+stringstream ss;
 
-void result();
-void open();
-void close();
+
+int MAX = 255;
+
+void open(int, ofstream &fout);
+void show();
 
 int main()
 {
-    cout << "enter n: "; cin >> n;
-    open();
-    result();
-    close();
+    char t[MAX];
+
+    setlocale(LC_ALL, "ukr");
+
+    ofstream fout;
+    cout << "Щоб записати натиснiть 1, шоб дозаписати натиснiть 2\n";
+    int choose = 0;
+    cin >> choose;
+    open(choose, fout);
+    cout << "щоб завершити запис введiть -" << endl;
+    int i = 0;
+    while(strcmp(t, "-") != 0){
+        cin.getline(t, MAX);
+
+        if (strcmp(t, "-") != 0 && i != 0)
+            fout << t << endl;
+
+        i++;
+    }
+    fout.close();
+
+    show();
     return 0;
 }
-
-void result()
-{
-   if (fo) // если есть доступ к файлу,
-    {
-        for(int i=1; i<=(n+1); i++){
-        gets(m); // инициализируем строку
-        fprintf(fo, "%s\n", m);
-        fprintf(file, "%d", i);
-        fprintf(file, "%s\t", m);
-        k=strlen(m);
-        fprintf(file, "lenght: %d\n", k);
-
-}
-}
+void open(int ch, ofstream &fout){
+    if(ch == 1){
+        fout.open("source.txt");
+    }else if (ch == 2){
+        fout.open("source.txt", ios::app);
+    }
 }
 
-void open()
-{
-    fo = fopen("source.txt","wt");
-    file = fopen("out.txt","wt");
-}
+void show(){
 
-void close()
-{
-    fclose(fo);
-    fclose(file);
-}
+    int k = 1;
+    char t[255];
 
+    stringstream ss;
+
+    ifstream fin("source.txt");
+    ofstream fout("out.txt");
+
+    while(fin.getline(t, MAX)) {
+        ss << k << " " << t << " " << strlen(t) << endl;
+        fout << ss.str();
+        k++;
+        ss.str(string());
+    }
+    fin.close();
+    fout.close();
+}
